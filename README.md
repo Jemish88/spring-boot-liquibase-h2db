@@ -2,7 +2,7 @@
 We are using version control tool for Java and other languages to manage, track and apply changes whenever required.
 Liquibase is an open source tool for database version control.
 Using Liquibase we can manage, tack and apply changes in DB using simple human readable changelog files.
-
+ 
 # Spring Boot 2 Liquibase Integration
 In this sample application H2(In Memory Database) is used to show simple integration of Liquibase using change log files.
 
