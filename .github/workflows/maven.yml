@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -31,16 +31,22 @@ jobs:
         name: h2-artifact
         path: target/*.war
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # env:
+    #   MESSAGE: ${{ vars.MESSAGE }}
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: h2-artifact
+          path: artifacts
+
+      - name: Run Artifact
+        run: java -jar artifacts/*.war
+
         
-    # steps:
-    # - uses: actions/checkout@v4
-    # - uses: actions/setup-java@v3
-    #   with:
-    #     java-version: '17'
-    #     distribution: 'temurin'
-    # - run: mvn clean package -DskipTests
-    # - run: mkdir h2 && cp target/*.jar h2
-    # - uses: actions/upload-artifact@v4
-    #   with:
-    #     name: Package
-    #     path: h2
+   
